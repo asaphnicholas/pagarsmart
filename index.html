@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Assets/style.css">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>Calculadora de Transações</title>
+</head>
+<body>
+    <section>
+        <main class="container">
+            <div id="calculator">
+                <h2>Preencha a calculadora para saber o
+                    <strong>quanto de dinheiro está deixando na mesa!</strong></h2>
+                
+                <form id="calculatorForm">
+                    <div class="input-field">
+                        <label for="faturamento_medio">Faturamento Médio (R$):</label>
+                        <input type="text" data-mascara='reais' placeholder="Digite um valor" id="faturamento_medio" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="ticket_medio">Ticket Médio (R$):</label>
+                        <input type="text" data-mascara='reais' placeholder="Digite seu Tiket Médio" id="ticket_medio" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="percentual_pix">Percentual de Vendas por PIX (%):</label>
+                        <input type="text" placeholder='Ex: 50' id="percentual_pix" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="percentual_boleto">Percentual de Vendas por Boleto (%):</label>
+                        <input type="text" placeholder='Ex: 50' id="percentual_boleto" required>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="percentual_plataforma_pix_boleto">Percentual da Plataforma sobre Boleto e PIX (%):</label>
+                        <input type="text" placeholder='Ex: 3,30' id="percentual_plataforma_pix_boleto" required>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="percentual_plataforma_cartao">Percentual da Plataforma sobre Cartão (%):</label>
+                        <input type="text" placeholder='Ex: 2,49' id="percentual_plataforma_cartao" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="valor_por_transacao">Valor por Transação (R$):</label>
+                        <input type="text" placeholder='Digite o valor' data-mascara='reais' id="valor_por_transacao" required>
+                    </div>
+                    
+                    <button type="submit" onclick="openModal()" id="calcular-btn" class="animate__animated animate__pulse animate__infinite">CALCULAR AGORA!</button>
+                </form>
+
+                <div id="results">
+                    <div id="resultsTable"></div>
+                    <div class="summary" id="calculation-results">
+                        <h2>Resultados</h2>
+
+                        <p>Quanto VOCÊ PAGA HOJE para sua PLATAFORMA atual / mês:<br><span id="style-resposta-01"><img src="/Assets/finance.svg" alt=""></span><span id="custoAtual"></span></p>
+
+                        <p>Quanto você VAI PAGAR com o novo modelo / mês:<br><span id="style-resposta-02"><img src="/Assets/money-bag.svg" alt=""></span><span id="custoNovo"></span></p>
+
+                        <p>Valor APROXIMADO DE GANHO / mês é de: <br><span id="style-resposta-03"><img src="/Assets/money.svg" alt=""> </span><span id="aumentoFaturamento"></span></p>
+
+                        <p>LUCRO total: <br><span id="style-resposta-03"><img src="/Assets/money-bag.svg" alt=""> </span><span id="lucroAproximado"></span></p>
+
+                        <p>Aguarde, em breve entraremos em contato.. </p>
+                    </div>
+                
+                </div>
+
+                <div id="error-message" >
+                    <img src="/Assets/ATENÇÃO ICON.png" alt="" class="animate__animated animate__pulse animate__infinite"><p> No momento este <strong>novo formato</strong> de <br>negócio não é viável para você.</p>
+                </div>
+
+            </div>
+                  <form>
+                    <div id="modal" class="modal-overlay">
+                        <div class="modal-content">
+                            <h2>Preencha seus <strong>dados</strong>  para ver os resultados e entrar na lista de <strong>pré-lançamento!</strong></h2>
+                            <label for="name">Nome:</label>
+                            <input type="text" name="nome" id="name" required>
+                
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email" required>
+                
+                            <label for="phone">Telefone:</label>
+                            <input type="tel" name="telefone" id="phone" required>
+
+                        <div id="style-btn-enviar">
+                            <button type="submit" onclick="submitModal()">Enviar</button>
+                        </div>
+                    </div>
+                  </form>
+            </div>
+        </main>
+    </section>
+<script src="/Assets/script.js"></script>
+</body>
+</html>
