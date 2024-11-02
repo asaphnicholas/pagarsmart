@@ -23,7 +23,8 @@ function converteParaFloat(valor) {
 
 // Abre o modal ao clicar em "Calcular"
 function openModal() {
-  const formulario = document.getElementById("calculatorForm");
+  const formulario = document.getElementById("calculatorForm")
+
   if (formulario.checkValidity()) {
     // Exibe o pop-up se todos os campos estiverem preenchidos
     document.getElementById("modal").style.display = "flex";
