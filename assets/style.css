@@ -25,6 +25,15 @@ h2 {
   color: white;
 }
 
+.content{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  color: white;
+}
+
 #section-01 {
   background: #05010c;
   background-image: url(/assets/bg\ TOPO\ 2.png);
