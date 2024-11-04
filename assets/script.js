@@ -23,7 +23,7 @@ function converteParaFloat(valor) {
 
 // Abre o modal ao clicar em "Calcular"
 function openModal() {
-  const formulario = document.getElementById("calculatorForm")
+  const formulario = document.getElementById("calculatorForm");
 
   if (formulario.checkValidity()) {
     // Exibe o pop-up se todos os campos estiverem preenchidos
@@ -168,17 +168,18 @@ function calculadoraTransacoes(
     custoNovo = 5790.9 + transoesTotal * 0.89;
   }
 
-  const aumentoFaturamento =
-    resultados.reduce((sum, r) => sum + r.produtorAdquirente, 0) -
-    resultados.reduce((sum, r) => sum + r.produtorDoppus, 0);
-
   const taxaBoletoPixAdquirente =
     valorPix * 0.0399 +
     transacoesPix * 0.99 +
     (valorBoleto * 0.0399 + transacoesBoleto * 3.49);
 
+  const aumentoFaturamento =
+    resultados.reduce((sum, r) => sum + r.produtorAdquirente, 0) -
+    resultados.reduce((sum, r) => sum + r.produtorDoppus, 0) -
+    taxaBoletoPixAdquirente;
+
   const custoFinal = custoNovo + taxaBoletoPixAdquirente - aumentoFaturamento;
-  const lucroAproximado = custoAtual - custoFinal;
+  const lucroAproximado = (custoAtual - custoFinal) * 12;
 
   return {
     resultados,
@@ -342,6 +343,7 @@ document
 
       // Mostra a div de resultados
       calculationResults.style.display = "block";
+      document.querySelector("#calculatorForm").style.display = "none";
     }
 
     // Mostra o container principal de resultados
@@ -391,3 +393,19 @@ const handleSubmit = (event) => {
 };
 
 document.querySelector(".container").addEventListener("submit", handleSubmit);
+
+// Animações na Página
+
+const myObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
+    }
+  });
+});
+
+const elements = document.querySelectorAll(".hidden");
+
+elements.forEach((elements) => myObserver.observe(elements));

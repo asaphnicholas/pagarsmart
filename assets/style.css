@@ -16,6 +16,20 @@ h2 {
   font-weight: 300;
 }
 
+.hidden {
+  opacity: 0;
+  filter: blur(15px);
+  transition: all 1s;
+  transform: translateX(-100%);
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+  transition: all 1s;
+}
+
 .container {
   margin: 0 auto;
   display: flex;
@@ -25,7 +39,7 @@ h2 {
   color: white;
 }
 
-.content{
+.content {
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -363,6 +377,31 @@ tr:hover {
   font-weight: 700;
 }
 
+#lucroTotalApresentation {
+  text-align: center;
+  justify-content: center;
+  background: green;
+  border-radius: 1rem;
+  margin-top: 4rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.948);
+}
+
+#lucroTotalApresentation img {
+  width: 17%;
+}
+
+#lucroTotalApresentation h1 {
+  font-size: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-decoration: underline;
+}
+
+#lucroTotalApresentation p {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
 #custoAtual {
   font-size: 3rem;
   background: red;
@@ -397,11 +436,6 @@ tr:hover {
   color: white;
 }
 
-#style-resposta-03 {
-  font-size: 3rem;
-  color: white;
-}
-
 .gif {
   display: flex;
   justify-content: center;
@@ -416,6 +450,10 @@ tr:hover {
 @media screen and (max-width: 600px) {
   #section-01 {
     background-position: bottom;
+  }
+
+  .content {
+    width: 90%;
   }
 
   #section-01 button {
@@ -453,7 +491,7 @@ tr:hover {
   }
 
   #section-01 button {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   #pre-lancamento h1 {
@@ -480,7 +518,7 @@ tr:hover {
   }
 
   .modalidade p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 1rem;
   }
 
@@ -495,7 +533,7 @@ tr:hover {
   }
 
   #lancamento button {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .container {
@@ -608,5 +646,24 @@ tr:hover {
   #style-resposta-04 img {
     width: 2.5rem;
     padding-top: 1rem;
+  }
+
+  #lucroTotalApresentation {
+    border-radius: 1rem;
+    margin-top: 4rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.948);
+  }
+
+  #lucroTotalApresentation img {
+    width: 17%;
+  }
+
+  #lucroTotalApresentation h1 {
+    font-size: 1.5rem;
+  }
+
+  #lucroTotalApresentation p {
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
   }
 }
