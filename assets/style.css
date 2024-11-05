@@ -1,5 +1,5 @@
 #calculadoraSection {
-  background-image: url(/Assets/BG\ Fundo.png);
+  background-image: url(/assets/bgfundo.png);
   background-size: cover;
   background-position: center center;
 }
@@ -50,7 +50,7 @@ h2 {
 
 #section-01 {
   background: #05010c;
-  background-image: url(/assets/bg\ TOPO\ 2.png);
+  background-image: url(/assets/bgtopo.png);
   background-size: cover;
   border-bottom: solid #4a1f9b;
 }
