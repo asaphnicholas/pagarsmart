@@ -53,6 +53,7 @@ h2 {
   background-image: url(/assets/bgtopo.png);
   background-size: cover;
   border-bottom: solid #4a1f9b;
+
 }
 
 #section-01 button {
@@ -73,15 +74,31 @@ h2 {
   text-align: center;
 }
 
-#headline h1 {
-  font-size: 2.8rem;
+#textStyleWord01{
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
   font-weight: 800;
-  margin-top: 2rem;
+  background: #4a1f9b;
+}
+
+#textStyleWord02{
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 800;
+  background: #4a1f9b;
+}
+
+#headline h1 {
+  font-size: 2.7rem;
+  font-weight: 800;
+  margin-top: 4rem;
   margin-bottom: 2rem;
 }
 
 #headline p {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 #headline img {
@@ -469,21 +486,25 @@ tr:hover {
     margin-bottom: 3rem;
   }
 
+  #headline br{
+    display: none;
+  }
+
   #headline h1 {
     margin-top: 0;
-    font-size: 1.7rem;
-    padding: 1rem;
+    font-size: 1.9rem;
+    padding: 4rem;
     margin-bottom: 0;
   }
 
   #headline p {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-top: 0;
-    padding: 1rem;
   }
 
   #headline img {
     width: 70%;
+    margin-bottom: -2rem;
   }
 
   #img-pessoa img {
@@ -492,6 +513,7 @@ tr:hover {
 
   #section-01 button {
     font-size: 1.3rem;
+    width: 70%;
   }
 
   #pre-lancamento h1 {

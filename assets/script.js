@@ -78,6 +78,8 @@ function submitModal() {
   document.getElementById("modal").style.display = "none";
 }
 
+let lucroAproximadoGlobal = 0;
+
 // Função principal da calculadora
 function calculadoraTransacoes(
   faturamentoMedio,
@@ -87,7 +89,8 @@ function calculadoraTransacoes(
   percentualPlataformaPixBoleto,
   percentualPlataformaCartao,
   valorPorTransacao
-) {
+){
+
   // Calculando os valores separados por tipo de transação
   const valorPix = faturamentoMedio * (percentualPix / 100);
   const valorBoleto = faturamentoMedio * (percentualBoleto / 100);
@@ -235,6 +238,7 @@ function criarTabelaResultados(resultados) {
 
   html += "</table>";
   return html;
+  
 }
 
 // Event listener para o formulário
@@ -283,6 +287,9 @@ document
     const resultsContainer = document.getElementById("results");
     const errorMessageDiv = document.getElementById("error-message");
     const calculationResults = document.getElementById("calculation-results");
+
+    // Atualiza a variável global com o valor de lucro aproximado
+    lucroAproximadoGlobal = resultado.lucroAproximado;
 
     // Verifica se o lucro aproximado é menor ou igual a zero
     if (resultado.lucroAproximado <= 0) {
@@ -350,31 +357,31 @@ document
     resultsContainer.style.display = "block";
   });
 
-// integração sheets
+
+
+// Função de envio do formulário para a planilha (sheets)
 const handleSubmit = (event) => {
   event.preventDefault();
 
+  // Obtém os valores dos inputs
   const faturamento_mensal = document.querySelector("#faturamento_medio").value;
   const teket_medio = document.querySelector("#ticket_medio").value;
   const perc_vendas_pix = document.querySelector("#percentual_pix").value;
   const perc_vendas_boleto = document.querySelector("#percentual_boleto").value;
-  const perc_plataforma_pix_boleto = document.querySelector(
-    "#percentual_plataforma_pix_boleto"
-  ).value;
-  const perc_plataforma_cartao = document.querySelector(
-    "#percentual_plataforma_cartao"
-  ).value;
-  const valor_taxa_transacao = document.querySelector(
-    "#valor_por_transacao"
-  ).value;
+  const perc_plataforma_pix_boleto = document.querySelector("#percentual_plataforma_pix_boleto").value;
+  const perc_plataforma_cartao = document.querySelector("#percentual_plataforma_cartao").value;
+  const valor_taxa_transacao = document.querySelector("#valor_por_transacao").value;
   const nome = document.querySelector("#name").value;
   const email = document.querySelector("#email").value;
   const telefone = document.querySelector("#phone").value;
 
+  const lucroAproximado = lucroAproximadoGlobal;
+
+  // Envia os dados para a planilha usando fetch
   fetch("https://api.sheetmonkey.io/form/i4AHCm5SDTPsfmMii2sfV8", {
-    method: "post",
+    method: "POST",
     headers: {
-      Accept: "application/jason",
+      Accept: "application/json", // Corrigido para JSON
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -388,11 +395,22 @@ const handleSubmit = (event) => {
       perc_plataforma_pix_boleto,
       perc_plataforma_cartao,
       valor_taxa_transacao,
+      lucroAproximado,
     }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Dados enviados com sucesso:", data);
+    // Aqui você pode adicionar uma mensagem de sucesso ou limpar os campos do formulário, se desejar
+  })
+  .catch(error => {
+    console.error("Erro ao enviar dados:", error);
   });
 };
 
+// Adiciona o evento de submit ao formulário
 document.querySelector(".container").addEventListener("submit", handleSubmit);
+
 
 // Animações na Página
 
@@ -409,3 +427,60 @@ const myObserver = new IntersectionObserver((entries) => {
 const elements = document.querySelectorAll(".hidden");
 
 elements.forEach((elements) => myObserver.observe(elements));
+
+
+// Bloquear o botão direito do mause
+
+if (document.addEventListener) {
+  document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+      return false;
+  });
+} else { //Versões antigas do IE
+  document.attachEvent("oncontextmenu", function(e) {
+      e = e || window.event;
+      e.returnValue = false;
+      return false;
+  });
+}
+
+
+// pixel do facebook
+
+!function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3965173153742123');
+    fbq('track', 'PageView');
+
+
+// Função que será chamada quando a div "resultsTable" estiver visível
+let handleVisibility = function(entries) {
+  entries.forEach(entry => {
+    // Verifica se a div "resultsTable" está visível e se a "error-message" NÃO está visível
+    if (entry.isIntersecting && !document.getElementById('error-message').offsetParent) {
+      fbq('track', 'Lead'); // Aciona o evento do Facebook Pixel
+
+      observer.unobserve(entry.target); // Desativa o observador após o acionamento para evitar múltiplas ativações
+    }
+  });
+};
+
+// Cria um novo observador com a função de callback acima
+let observer = new IntersectionObserver(handleVisibility, {
+  root: null, // Usa o viewport como root
+  threshold: 0.5 // Define 50% de visibilidade da div para acionar o evento
+});
+
+// Seleciona a div "resultsTable" e inicia a observação
+let targetDiv = document.getElementById('calculation-results');
+if (targetDiv) {
+  observer.observe(targetDiv);
+}
+
+
